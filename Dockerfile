@@ -10,4 +10,4 @@ FROM alpine:latest
 RUN apk --no-cache add ca-certificates
 WORKDIR /root/
 COPY --from=builder /build/app .
-CMD ["./app"]  
+ENTRYPOINT  ["/root/app"]  
