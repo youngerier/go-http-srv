@@ -1,0 +1,7 @@
+filebeat.inputs:
+  - type: log
+    enabled: true
+    paths:
+      - "/Users/ziggle/Documents/GitHub/go-http-srv/log/*.log"
+output.console:
+  pretty: true
