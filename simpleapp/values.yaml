@@ -41,16 +41,16 @@ service:
   port: 9090
 
 ingress:
-  enabled: false
+  enabled: true
   annotations: {}
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: chart-example.local
+    - host: ziggle.io
       paths:
       - path: /
         backend:
-          serviceName: chart-example.local
+          serviceName: simpleapp
           servicePort: 80
   tls: []
   #  - secretName: chart-example-tls
