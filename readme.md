@@ -1,5 +1,5 @@
-## 清理 <none>镜像
-docker image prune
+## 清理 `<none>` 镜像
+`docker image prune`
 
 ## minikube中 docker-daemon指向本地
     eval $(minikube docker-env)
