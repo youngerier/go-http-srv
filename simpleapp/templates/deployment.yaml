@@ -28,6 +28,16 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
+        {{- if .Values.sidecarlog.enable }}
+        - image: elastic/filebeat:6.8.16
+          name: filebeat
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+          - name: app-logs
+            mountPath: /app/log
+          - name: filebeat-config
+            mountPath: /etc/filebeat/
+        {{- end }}
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
@@ -59,3 +69,9 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      volumes:
+      - name: app-logs
+        emptyDir: {}
+      - name: filebeat-config
+        configMap:
+          name: filebeat-config

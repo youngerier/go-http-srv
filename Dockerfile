@@ -8,6 +8,6 @@ RUN ls &&\
 
 FROM alpine:3.13  
 # RUN apk --no-cache add ca-certificates
-WORKDIR /root/
+WORKDIR /app/
 COPY --from=builder /build/app .
-ENTRYPOINT  ["/root/app"]  
+ENTRYPOINT  ["/app/app"]  
