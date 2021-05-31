@@ -1,5 +1,5 @@
 ### 环境
-  - macos
+  - macos 11.3
   - docker version
 ```
 ➜  simpleapp git:(master) docker -v    
