@@ -4,9 +4,9 @@ metadata:
   name: filebeat-config
 data:
   filebeat.yml: |
-    filebeat.prospectors:
-    - input_type: log
-      paths:
-        - "/app/log/*"
+    filebeat.inputs:
+      - type: log
+        paths:
+          - /app/log/*.log
     output.console:
       pretty: true

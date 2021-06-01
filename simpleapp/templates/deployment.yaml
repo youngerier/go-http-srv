@@ -36,7 +36,7 @@ spec:
           - name: app-logs
             mountPath: /app/log
           - name: filebeat-config
-            mountPath: /etc/filebeat/
+            mountPath: /usr/share/filebeat
         {{- end }}
         - name: {{ .Chart.Name }}
           securityContext:
