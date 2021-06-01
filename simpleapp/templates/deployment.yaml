@@ -29,20 +29,29 @@ spec:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
         {{- if .Values.sidecarlog.enable }}
-        - image: elastic/filebeat:6.8.16
+        - image: elastic/filebeat:7.12.1
           name: filebeat
           imagePullPolicy: IfNotPresent
+          args: [
+            "-c", "/etc/filebeat.yml",
+            "-e"
+          ]
           volumeMounts:
           - name: app-logs
             mountPath: /app/log
           - name: filebeat-config
-            mountPath: /usr/share/filebeat
+            mountPath: /etc/filebeat.yml
+            readOnly: true
+            subPath: filebeat.yml
         {{- end }}
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          volumeMounts:
+            - name: app-logs
+              mountPath: /app/log
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
